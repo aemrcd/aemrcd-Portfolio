@@ -25,7 +25,7 @@ body {
 .logo {
     width: 90px;
     height: 90px;
-    background-image: url(../PICTURE/logo.svg);
+    background-image: url(PICTURE/logo.svg);
     background-repeat: no-repeat;
 }
 
