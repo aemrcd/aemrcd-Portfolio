@@ -46,7 +46,7 @@ window.addEventListener('scroll', function() {
     const viewportHeight = window.innerHeight;
     
     // Calculate 30% of the document height to play video earlier
-    const top = documentHeight * 0.3 - viewportHeight;
+    const top = documentHeight * 0.6 - viewportHeight;
 
     // Check if the scroll position is below 30% of the document height
     if (scrollPosition >= top) {
