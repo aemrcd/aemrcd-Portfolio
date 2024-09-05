@@ -45,17 +45,17 @@ window.addEventListener('scroll', function() {
     const documentHeight = document.documentElement.scrollHeight;
     const viewportHeight = window.innerHeight;
     
-    // Calculate 90% of the document height (corrected the multiplier)
-    const top = documentHeight * 0.4 - viewportHeight;
+    // Calculate 30% of the document height to play video earlier
+    const top = documentHeight * 0.3 - viewportHeight;
 
-    // Check if the scroll position is below 90% of the document height
+    // Check if the scroll position is below 30% of the document height
     if (scrollPosition >= top) {
-        // Play the video if scrolling past the 90% mark
+        // Play the video if scrolling past the 30% mark
         if (video.paused) {
             video.play();
         }
     } else {
-        // Pause the video if scrolling above the 90% mark
+        // Pause the video if scrolling above the 30% mark
         if (!video.paused) {
             video.pause();
         }
