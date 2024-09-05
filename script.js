@@ -1,4 +1,3 @@
-// A DISPLAY SCROLLING FUNCTION THAT LET THE VIDEO REDUCE THE RESOLUTION WHILE SCROLLING
 window.addEventListener('scroll', function() {
     // Select the video container
     const videoContainer = document.querySelector('.video-container');
@@ -7,14 +6,27 @@ window.addEventListener('scroll', function() {
     const targetWidthPx = 1280;
     const targetHeightPx = 660;
 
+    // Get the viewport width
+    const viewportWidth = window.innerWidth;
+
+    // Define a breakpoint for mobile screens (e.g., 768px)
+    const mobileBreakpoint = 768;
+
+    // If the viewport width is less than or equal to the mobile breakpoint, skip resizing
+    if (viewportWidth <= mobileBreakpoint) {
+        return;
+    }
+
     // Get the current scroll position
     const scrollY = window.scrollY;
 
     // Define the maximum scroll value where the animation should complete
     const maxScroll = 600; // Adjust this value to control the scroll length for the animation
 
-    // Calculate the current width and height based on the scroll position
+    // Calculate the scale factor based on scroll position
     const scaleFactor = Math.max(0, Math.min(1, scrollY / maxScroll)); // Clamps the value between 0 and 1
+
+    // Calculate the new width and height
     const initialWidthPx = window.innerWidth;
     const initialHeightPx = window.innerHeight;
 
@@ -26,12 +38,14 @@ window.addEventListener('scroll', function() {
     videoContainer.style.height = `${newHeightPx}px`;
 
     // Center the video container by setting left and top positions
+    videoContainer.style.position = 'absolute'; // Ensure position is set to absolute
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
     videoContainer.style.left = `${(windowWidth - newWidthPx) / 2}px`;
     videoContainer.style.top = `${(windowHeight - newHeightPx) / 2}px`;
 });
+
 
 // Select the video and button elements
 const video = document.getElementById('scroll-video');
@@ -43,21 +57,22 @@ playPauseBtn.addEventListener('click', function() {
     if (video.paused) {
         // Play the video and change the icon to 'Pause'
         video.play();
-        playPauseIcon.classList.remove('fa-play');
-        playPauseIcon.classList.add('fa-pause');
+        playPauseIcon.classList.remove('bx-play');
+        playPauseIcon.classList.add('bx-pause');
     } else {
         // Pause the video and change the icon to 'Play'
         video.pause();
-        playPauseIcon.classList.remove('fa-pause');
-        playPauseIcon.classList.add('fa-play');
+        playPauseIcon.classList.remove('bx-pause');
+        playPauseIcon.classList.add('bx-play');
     }
 });
 
-// Optional: Update icon when the video ends
+// Optional: Reset to play icon when the video ends
 video.addEventListener('ended', function() {
-    playPauseIcon.classList.remove('fa-pause');
-    playPauseIcon.classList.add('fa-play');
+    playPauseIcon.classList.remove('bx-pause');
+    playPauseIcon.classList.add('bx-play');
 });
+
 
 
 // CARD WHEEL 

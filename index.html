@@ -13,11 +13,6 @@
 <body>
     <div class="header">
         <a href="#" class="logo"></a>
-        <input type="checkbox" id="check">
-        <label for="check" class="icons">
-          <a class='bx bx-menu' id="menu-icon"></a>
-          <a class='bx bx-x' id="close-icon"></a>
-        </label>
         
         <nav class="navbar">
           <a href="#">Home</a>
@@ -48,14 +43,16 @@
         <div class="infoaboutme" id="infoaboutme">
           <h1 class="Aboutme_text">About Me</h1>
         </div>
-          <div class="video-container">
-            <video id="scroll-video" src="PICTURE/This_Is_Me_1.mp4" autoplay loop></video>
-              <button id="play-pause-btn">
-                <i id="play-pause-icon" class="fas fa-play"></i>
-              </button>
-          </div>
+            <div class="video-container">
+              <video id="scroll-video" src="PICTURE/This_Is_Me_1.mp4" autoplay muted loop></video>
+            </div>
+              <div class="buttonplay">
+                <button id="play-pause-btn">
+                    <i id="play-pause-icon" class="bx bx-play"></i> 
+                </button>
+              </div>
     </div>
-  
+    
   <div class="container">
     <h1 class="Aboutme_text" id="MyWorks">My Works</h1>
       <div class="scroll-container" id="product-container">
@@ -68,6 +65,7 @@
   </div>
 
   <script src="script.js"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+ 
 </body>
 </html>

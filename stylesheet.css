@@ -12,13 +12,15 @@ body {
     background: linear-gradient(#6c374c, #70487d, #70487d, #b897c3);
     background-attachment: fixed;
 }
+/* Header */
 .header {
     display: flex;
-    width: 100%;
-    padding: 1.3rem 10%;
-    background-color:rgba(255, 255, 255, 0);
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    padding: 1.3rem 10%;
+    background-color: rgba(255, 255, 255, 0);
+    position: relative; /* Ensure positioning context for menu icon */
     z-index: 2;
 }
 
@@ -29,24 +31,30 @@ body {
     background-repeat: no-repeat;
 }
 
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
 .navbar a {
     font-size: 1vw;
     color: #ffffff;
     text-decoration: none;
     font-weight: 500;
     margin-left: 2.5rem;
+}
 
-}
-#check {
-    display: none;
-}
+
+
 .icons {
     position: absolute;
-    right: 5%;  
+    right: 5%;
     font-size: 2.8rem;
-    color: #ff0000;
+    color: #ffffff;
     cursor: pointer;
-    display: none;
+    display: block; /* Show the icon initially */
+    z-index: 3; /* Ensure it's on top */
+
 }
 
 .Name {
@@ -67,7 +75,7 @@ body {
 }
 
 .Quotes h2{
-    font-size: 1.8vw;
+    font-size: 1.5vw;
 }
 /*BUTTON AREA*/
 .hirebtn {
@@ -133,8 +141,6 @@ body {
 /*END OF PICTURE AND QUOTES*/
 
 
-
-
 /*2nd PAGE*/
 
 
@@ -174,39 +180,42 @@ body {
     object-fit: cover;
 }
 /* PLAY AND PAUSE VIDEO */
-/* Style for the video element */
-#scroll-video {
-    display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 /* Style for the play/pause button */
+.buttonplay {
+    position: absolute;
+    bottom: 4%; /* Adjust this value to control vertical spacing */
+    left: 79%; /* Align it to the right */
+}
 #play-pause-btn {
     display: block;
     margin: 20px auto;
     padding: 10px;
     font-size: 24px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #70487d;
     border: none;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
 }
 
 /* Hover effect for the button */
 #play-pause-btn:hover {
-    background-color: #0056b3;
+    background-color: #70487d;
 }
+
+/* Icon inside button */
+#play-pause-icon {
+    font-size: 24px;
+}
+
 
 /* Active state for the button */
 #play-pause-btn:active {
-    background-color: #004085;
+    background-color: #70487d;
     transform: scale(0.98);
 }
 
@@ -240,7 +249,7 @@ body {
     display: block;
 }
 .container {
-    margin-top: 110%;
+    margin-top: 88%;
 }
 
 .scroll-button {
@@ -264,25 +273,6 @@ body {
 }
 
 /* add button */
-.product-card {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    margin: 0 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    width: 400px; /* Adjust width as needed */
-    height: 500px; /* Adjust height as needed */
-    background-color: #f9f9f9; /* Background color to ensure readability */
-    text-align: center; /* Center the content */
-}
-
-.product-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure content covers the card area */
-    display: block;
-}
 
 .info-box {
     display: none; /* Hide by default */
@@ -319,4 +309,120 @@ body {
 
 .plus-button:hover {
     background-color: #6c374c; /* Darker color on hover */
+}
+
+/* END 3rd */
+
+/* Mobile Media Query */
+@media (max-width: 768px) {
+    /* Header */
+    .header {
+        padding: 1rem 5%;
+    }
+
+    .logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .navbar a {
+        font-size: 3vw;
+        margin-left: 1rem;
+    }
+
+    .icons {
+        font-size: 2rem;
+        right: 3%;
+    }
+
+    .Name h1 {
+        font-size: 4vw;
+    }
+
+    .Quotes h2 {
+        font-size: 3vw;
+    }
+
+    .hirebtn {
+        padding: 1% 2%;
+        font-size: 3vw;
+        bottom: 70%;
+    }
+
+    .SHAPE {
+        left: 80%;
+        width: 150px;
+        height: 150px;
+        transform: translateX(-50%);
+    }
+
+    .diamond {
+        width: 80%;
+        height: 80%;
+        left: 10%;
+        top: 10%;
+    }
+
+    .diamond-image {
+        width: 120%;
+        height: 120%;
+    }
+
+    .infoaboutme {
+        left: 5%;
+        width: 90%;
+    }
+
+    .Aboutme_text {
+        font-size: 5vw;
+    }
+
+    .video-container {
+        height: 60%;
+    }
+
+    .buttonplay {
+        display: none;
+    }
+
+    #play-pause-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+    .scroll-container {
+        height: 100%;
+
+    }
+  
+    .product-card {
+        width: 250px; /* Adjust as needed */
+        height: 400px; /* Set a fixed height */
+        gap: 10%;
+    }
+   
+    .scroll-button button {
+        width: 40px;
+        height: 40px;
+        
+    }
+
+    .plus-button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .info-box {
+        width: 90%;
+    }
+    .container {
+        margin-top: 180%;
+    }
+    .page-2 {
+        top: 50%;
+        height: 80%;
+    }
+
+
 }
