@@ -33,34 +33,32 @@ window.addEventListener('scroll', function() {
     videoContainer.style.top = `${(windowHeight - newHeightPx) / 2}px`;
 });
 
-window.addEventListener('scroll', function() {
-    // Select the video element
-    const video = document.getElementById('scroll-video');
-    
-    // Ensure the video element exists
-    if (!video) return;
+// Select the video and button elements
+const video = document.getElementById('scroll-video');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const playPauseIcon = document.getElementById('play-pause-icon');
 
-    // Calculate the scroll position and the document height
-    const scrollPosition = window.scrollY;
-    const documentHeight = document.documentElement.scrollHeight;
-    const viewportHeight = window.innerHeight;
-    
-    // Calculate 30% of the document height to play video earlier
-    const top = documentHeight * 0.6 - viewportHeight;
-
-    // Check if the scroll position is below 30% of the document height
-    if (scrollPosition >= top) {
-        // Play the video if scrolling past the 30% mark
-        if (video.paused) {
-            video.play();
-        }
+// Add event listener to the play/pause button
+playPauseBtn.addEventListener('click', function() {
+    if (video.paused) {
+        // Play the video and change the icon to 'Pause'
+        video.play();
+        playPauseIcon.classList.remove('fa-play');
+        playPauseIcon.classList.add('fa-pause');
     } else {
-        // Pause the video if scrolling above the 30% mark
-        if (!video.paused) {
-            video.pause();
-        }
+        // Pause the video and change the icon to 'Play'
+        video.pause();
+        playPauseIcon.classList.remove('fa-pause');
+        playPauseIcon.classList.add('fa-play');
     }
 });
+
+// Optional: Update icon when the video ends
+video.addEventListener('ended', function() {
+    playPauseIcon.classList.remove('fa-pause');
+    playPauseIcon.classList.add('fa-play');
+});
+
 
 // CARD WHEEL 
 document.addEventListener("DOMContentLoaded", function() {

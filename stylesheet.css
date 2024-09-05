@@ -173,6 +173,47 @@ body {
     height: 100%;
     object-fit: cover;
 }
+/* PLAY AND PAUSE VIDEO */
+/* Style for the video element */
+#scroll-video {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the play/pause button */
+#play-pause-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 24px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 60px;
+    height: 60px;
+}
+
+/* Hover effect for the button */
+#play-pause-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Active state for the button */
+#play-pause-btn:active {
+    background-color: #004085;
+    transform: scale(0.98);
+}
+
+/* Icon inside button */
+#play-pause-icon {
+    font-size: 24px;
+}
 
 /* 3rd part page */
 .scroll-container {
