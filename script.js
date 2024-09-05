@@ -46,7 +46,7 @@ window.addEventListener('scroll', function() {
     const viewportHeight = window.innerHeight;
     
     // Calculate 90% of the document height (corrected the multiplier)
-    const top = documentHeight * 0.7 - viewportHeight;
+    const top = documentHeight * 0.4 - viewportHeight;
 
     // Check if the scroll position is below 90% of the document height
     if (scrollPosition >= top) {
