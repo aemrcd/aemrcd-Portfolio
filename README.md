@@ -1,1 +1,1 @@
-<img src="PICTURE/WEBDESIGN.gif">
+<img src="PICTURE/Portfolio¨.gif">
