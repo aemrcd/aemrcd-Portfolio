@@ -1,44 +1,27 @@
 window.addEventListener('scroll', function() {
-    // Select the video container
     const videoContainer = document.querySelector('.video-container');
-
-    // Define the target dimensions in pixels
     const targetWidthPx = 1280;
     const targetHeightPx = 660;
-
-    // Get the viewport width
     const viewportWidth = window.innerWidth;
-
-    // Define a breakpoint for mobile screens (e.g., 768px)
     const mobileBreakpoint = 768;
 
-    // If the viewport width is less than or equal to the mobile breakpoint, skip resizing
     if (viewportWidth <= mobileBreakpoint) {
         return;
     }
 
-    // Get the current scroll position
     const scrollY = window.scrollY;
+    const maxScroll = 600;
+    const scaleFactor = Math.max(0, Math.min(1, scrollY / maxScroll));
 
-    // Define the maximum scroll value where the animation should complete
-    const maxScroll = 600; // Adjust this value to control the scroll length for the animation
-
-    // Calculate the scale factor based on scroll position
-    const scaleFactor = Math.max(0, Math.min(1, scrollY / maxScroll)); // Clamps the value between 0 and 1
-
-    // Calculate the new width and height
     const initialWidthPx = window.innerWidth;
     const initialHeightPx = window.innerHeight;
-
     const newWidthPx = initialWidthPx - ((initialWidthPx - targetWidthPx) * scaleFactor);
     const newHeightPx = initialHeightPx - ((initialHeightPx - targetHeightPx) * scaleFactor);
 
-    // Apply the new width and height to the video container
     videoContainer.style.width = `${newWidthPx}px`;
     videoContainer.style.height = `${newHeightPx}px`;
 
-    // Center the video container by setting left and top positions
-    videoContainer.style.position = 'absolute'; // Ensure position is set to absolute
+    videoContainer.style.position = 'absolute';
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
@@ -46,42 +29,32 @@ window.addEventListener('scroll', function() {
     videoContainer.style.top = `${(windowHeight - newHeightPx) / 2}px`;
 });
 
-
-// Select the video and button elements
 const video = document.getElementById('scroll-video');
 const playPauseBtn = document.getElementById('play-pause-btn');
 const playPauseIcon = document.getElementById('play-pause-icon');
 
-// Add event listener to the play/pause button
 playPauseBtn.addEventListener('click', function() {
     if (video.paused) {
-        // Play the video and change the icon to 'Pause'
         video.play();
         playPauseIcon.classList.remove('bx-play');
         playPauseIcon.classList.add('bx-pause');
     } else {
-        // Pause the video and change the icon to 'Play'
         video.pause();
         playPauseIcon.classList.remove('bx-pause');
         playPauseIcon.classList.add('bx-play');
     }
 });
 
-// Optional: Reset to play icon when the video ends
 video.addEventListener('ended', function() {
     playPauseIcon.classList.remove('bx-pause');
     playPauseIcon.classList.add('bx-play');
 });
 
-
-
-// CARD WHEEL 
 document.addEventListener("DOMContentLoaded", function() {
     const productContainer = document.getElementById('product-container');
     const scrollRightButton = document.getElementById('scroll-right');
     const scrollLeftButton = document.getElementById('scroll-left');
 
-    // Fetch data from the JSON file
     fetch('cardwheel.json')
         .then(response => {
             if (!response.ok) {
@@ -91,11 +64,9 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(products => {
             products.forEach(product => {
-                // Create a product card
                 const productCard = document.createElement('div');
                 productCard.classList.add('product-card');
 
-                // Create the info box and plus button if info is available
                 let infoBox = '';
                 if (product.info && product.showInfo) {
                     infoBox = `
@@ -111,10 +82,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     ${infoBox}
                 `;
 
-                // Append the product card to the container
                 productContainer.appendChild(productCard);
 
-                // Add event listener to the plus button
                 const plusButton = productCard.querySelector('.plus-button');
                 if (plusButton) {
                     plusButton.addEventListener('click', () => {
@@ -130,18 +99,16 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(error => console.error('Error fetching the products:', error));
 
-    // Scroll to the right when button is clicked
     scrollRightButton.addEventListener('click', () => {
         productContainer.scrollBy({
-            left: 300, // Adjust this value to control scroll amount
+            left: 300,
             behavior: 'smooth'
         });
     });
 
-    // Scroll to the left when button is clicked
     scrollLeftButton.addEventListener('click', () => {
         productContainer.scrollBy({
-            left: -300, // Use negative value to scroll left
+            left: -300,
             behavior: 'smooth'
         });
     });
