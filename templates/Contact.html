@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/stylesheet.css">
+    <style>
+        .captcha-container { margin: 1rem 0; position: relative; }
+        #captchaImage { cursor: pointer; border: 1px solid #ddd; border-radius: 4px; }
+        .refresh-captcha { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+        .hidden { display: none; }
+        .privacy-disclaimer { font-size: 0.8em; color: #e7e7e7; }
+        .invalid-feedback { display: none; }
+        .is-invalid ~ .invalid-feedback { display: block; }
+    </style>
+</head>
+<body class="p-3">
+    
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <h2 class="text-center mb-4">Contact Me</h2>
+                <form id="contactForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" maxlength="50" required placeholder="Name">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required placeholder="Email">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject (max 100 chars)</label>
+                        <input type="text" class="form-control" id="subject" maxlength="100" placeholder="Subject (max 100 chars)">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message </label>
+                        <textarea class="form-control" id="message" rows="5" maxlength="500" placeholder="Message (max 500 words)"></textarea>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="captcha-container">
+                        <div class="h-captcha" data-sitekey="{{ sitekey }}" ></div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="privacyCheck" required>
+                        <label class="form-check-label" for="privacyCheck">I agree to the privacy policy</label>
+                        <div class="invalid-feedback">You must agree to the privacy policy</div>
+                    </div>
+                    <button type="/submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+                <div id="thankYou" class="hidden alert alert-success mt-3">
+                    Thank you! Your message has been sent successfully.
+                </div>
+                <div class="privacy-disclaimer mt-3">
+                    By submitting this form, you acknowledge that the information provided will be securely 
+                    stored in our database for the sole purpose of facilitating communication. Your email 
+                    address will undergo partial masking (e.g., exa****@d***.com) to protect your identity, 
+                    and all data will be encrypted using industry-standard security protocols. We commit 
+                    to compliance with GDPR and CCPA regulations, ensuring your right to access, modify, 
+                    or request deletion of your information at any time. For security monitoring, IP 
+                    addresses may be temporarily logged but never associated with personal data. No 
+                    third-party sharing or commercial use of your information will occur without 
+                    explicit consent.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.hcaptcha.com/1/api.js?hl=en" async defer></script>
+
+    <script>
+        // When the form is submitted, this function will be triggered
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+    
+            // Clear any previous error messages
+            clearErrors();
+    
+            // Get the captcha response token
+            const captchaToken = hcaptcha.getResponse();
+    
+            // If the captcha token is not present, show an error message
+            if (!captchaToken) {
+                showError('captcha', 'Please complete the CAPTCHA');
+                return;  // Stop further execution if captcha is not solved
+            }
+    
+            // Collect form data into an object
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                captcha: captchaToken  // Include the captcha token in the data
+            };
+    
+            // Send the form data to the server using fetch
+            fetch('/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)  // Convert the form data to JSON
+            })
+            .then(response => response.json())  // Wait for the server response
+            .then(result => {
+                // If the server confirms the submission was successful
+                if (result.success) {
+                    showSuccessMessage();
+                } else {
+                    showErrors(result.errors);  // Display server-side validation errors
+                }
+            });
+        });
+    
+        // Function to clear any previous error messages
+        function clearErrors() {
+            const errorFields = document.querySelectorAll('.is-invalid');
+            errorFields.forEach(field => field.classList.remove('is-invalid'));  // Remove invalid class
+    
+            const feedbacks = document.querySelectorAll('.invalid-feedback');
+            feedbacks.forEach(feedback => feedback.textContent = '');  // Clear error messages
+        }
+    
+        // Function to display an error on a specific field
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            field.classList.add('is-invalid');  // Add invalid class to the field
+            const feedback = field.closest('.form-group').querySelector('.invalid-feedback');
+            feedback.textContent = message;  // Set the error message
+        }
+    
+        // Function to display the thank you message after successful submission
+        function showSuccessMessage() {
+            document.getElementById('contactForm').classList.add('hidden');
+            document.getElementById('thankYou').classList.remove('hidden');
+        }
+    
+        // Function to display errors from the server (e.g., field validation errors)
+        function showErrors(errors) {
+            for (const field in errors) {
+                if (errors.hasOwnProperty(field)) {
+                    showError(field, errors[field]);
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>
