@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-SMTP_SERVER = os.getenv("SMTP_SERVER")  # e.g., "smtp.gmail.com"
-SMTP_PORT = int(os.getenv("SMTP_PORT", 587))  # Default to 587 for TLS
-SMTP_EMAIL = os.getenv("SMTP_EMAIL")  # Your email address
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")  # Your email password
-RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")  # Email to receive the form submission
+SMTP_SERVER = os.getenv("SMTP_SERVER")  
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))  
+SMTP_EMAIL = os.getenv("SMTP_EMAIL")  
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")  
+RECIPIENT_EMAIL = os.getenv("RECIPIENT_EMAIL")  
 
 def send_email(subject, body):
     """
