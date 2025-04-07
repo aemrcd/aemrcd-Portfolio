@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,81 +10,80 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/stylesheet.css">
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+   
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-nav px-3 px-md-5 ">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="/static/PICTURE/logo.svg" alt="Logo" width="70" height="70" style="filter: brightness(0) invert(0);">
+            </a>
+
+            <!-- Toggler Button (Mobile) -->
+            <button class="navbar-toggler border border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-lg-end" id="navbarNav">
+                <ul class="navbar-nav  text-center text-lg-start">
+                    <li class="nav-item">
+                        <a class="nav-link text-fonts" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-fonts" href="Contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-fonts" href="#MyWorks">My Works</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent px-3 px-md-5 sticky-top">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" href="#">
-      <img src="/static/PICTURE/logo.svg" alt="Logo" width="70" height="70">
-    </a>
+    </nav>
 
-    <!-- Toggler Button (Mobile) -->
-    <button 
-      class="navbar-toggler border border-light" 
-      type="button" 
-      data-bs-toggle="collapse" 
-      data-bs-target="#navbarNav"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Hero Section -->
+    <section class="hero-section bg-hero">
+        <div class="container px-4 px-md-6 py-3 rounded-3">
+            <div class="row align-items-center">
+                <!-- Text Column -->
+                <div class="col-12 col-md-8 text-fonts text-center text-md-start">
+                    <h1 class="display-7 fw-bold mb-3">ANGELITO MERCADO JR</h1>
+                    <h2 class="display-8 fw-light mb-3">Kuben Videregående Skole</h2>
+                    <p class="lead fw-normal mb-4" style="letter-spacing: 2px;">IT-Programmer</p>
 
-    <!-- Navbar Links -->
-    <div 
-      class="collapse navbar-collapse justify-content-lg-end" 
-      id="navbarNav"
-    >
-      <ul class="navbar-nav text-center text-lg-start">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href=Contact>Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#MyWorks">My Works</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
- <!-- Hero Section -->
-<section class="hero-section bg-blue">
-  <div class="container px-4 px-md-6 py-3 rounded-3">
-      <div class="row align-items-center">
-          <!-- Text Column -->  
-          <div class="col-12 col-md-8 text-white text-center text-md-start">
-              <h1 class="display-6  fw-bold mb-3" >ANGELITO MERCADO JR</h1>
-              <h2 class="display-10 fw-light mb-3">Kuben Videregående Skole</h2>
-              <p class="lead fw-normal mb-4">IT-Programmer</p>
-              <a href="#ABOUT" class="btn btn-outline-light btn-lg mt-3">Hire Me!</a>
-          </div>
-          
-          <!-- Image Column -->
-          <div class="col-12 col-md-4 position-relative text-center mt-4 mt-md-0">
-              <div class="magic-pattern-container mx-auto">
-                  <img src="/static/PICTURE/PORTFOLIO.png" class="profile-image rounded-circle">
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
+                    <a href="Contact" class="btn btn-outline-custom btn-lg px-4 py-2">
+                        <i class='bx bx-envelope-open me-2' style="letter-spacing: 2px;"></i>Hire Me!
+                    </a>
+                </div>
 
-    <!-- About Section -->
-    <section id="infoaboutme" class="py-5">
+                <!-- Image Column -->
+                <div class="col-12 col-md-4 position-relative text-center mt-4 mt-md-0">
+                    <div class="magic-pattern-container mx-auto">
+                        <img src="/static/PICTURE/PORTFOLIO.png" class="profile-image rounded-5 img-fluid " >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section (Text Only) at the end of Hero -->
+    <section id="infoaboutme" class="py-5 bg-blueheroend ">
         <div class="container px-3 px-md-5">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-8 text-center mb-4">
-                    <h2 class="text-white fw-bold">About Me</h2>
+                <div class="col-12 col-md-8 text-center mx-5 mb-5">
+                    <h2 class="text-fonts fw-bold" style="letter-spacing: 2px;">About Me</h2>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Video Section (Responsive Container) -->
+    <section id="video-section" class="py-5 bg-videocontainer">
+        <div class="container px-3 px-md-5">
+            <div class="row justify-content-center">
                 <div class="col-12 col-md-10 position-relative">
                     <div class="video-container rounded-3 overflow-hidden">
                         <video id="scroll-video" src="/static/PICTURE/This_Is_Me_1.mp4" autoplay loop muted class="w-100"></video>
@@ -97,28 +97,52 @@
     </section>
 
     <!-- My Works Section -->
-    <section id="MyWorks" class="py-5">
+    <section id="MyWorks" class="py-5 bg-mywork">
         <div class="container px-3 px-md-5">
             <div class="row justify-content-center">
+                <!-- Title for My Works -->
                 <div class="col-12 col-md-8 text-center mb-4">
-                    <h2 class="text-white fw-bold">My Works</h2>
-                </div>
-                <div class="col-12">
-                    <div id="workCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner" id="product-container"></div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#workCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon bg-white rounded-circle shadow" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#workCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon bg-white rounded-circle shadow" aria-hidden="true"></span>
-                        </button>
-                    </div>
+                    <h2 class="text-fonts fw-bold">My Works</h2>
                 </div>
             </div>
         </div>
     </section>
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for item in carousel_items %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="card shadow-lg h-100">
+                    {% if item.image.endswith('.mp4') %}
+                    <video class="card-img-top" controls>
+                        <source src="{{ item.image }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% else %}
+                    <img src="{{ item.image }}" class="card-img-top" alt="Portfolio Media">
+                    {% endif %}
+                    <div class="card-body bg-imagecarousel">
+                        <h5 class="card-title">{{ item.info_title }}</h5>
+                        <p class="card-text">{{ item.info }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/script.js"></script>
 </body>
+
 </html>

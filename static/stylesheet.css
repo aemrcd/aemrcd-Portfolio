@@ -1,73 +1,77 @@
-html {
-    scroll-behavior: smooth;
+:root {
+    --hero-bg: #f1e9d2;
+    --secondary-bg: #ece0bd;
+    --last-bg: #ddd5bb;
+    --fonts: #000000;    
+    --button-bg: #5c3d2e;
+    --button-hover: #a37f61;
 }
 
-body {
-    font-family: 'Mochiy Pop One', sans-serif;
-}
+/* ===== General Styles ===== */
+.bg-navbar { background-color: var(--hero-bg); }
+.bg-hero { background-color: var(--hero-bg); }
+.bg-blueheroend { background: linear-gradient(to bottom, #f1e9d2 0%, var(--secondary-bg) 100%); }
+.bg-videocontainer { background-color: var(--secondary-bg); }
+.bg-mywork { background: linear-gradient(to bottom, #ece0bd 0%, var(--last-bg) 100%); }
+.bg-imagecarousel { background-color: var(--last-bg); }
+
+.text-fonts { color: var(--fonts); }
+.mb-100 { margin-bottom: 150px; }
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Mochiy Pop One', sans-serif; }
+
 .navbar {
     backdrop-filter: blur(10px);
+    background-color: #f1e9d2;
 }
 
-.progress-container {
-    position: fixed;
-    top: 90px;
-    left: 0;
+/* ===== Carousel Styles ===== */
+#imageCarousel {
+    background-color: var(--last-bg);
+    padding: 4rem 0;
     width: 100%;
-    z-index: 1025;
 }
 
-.progress {
-    height: 2.5px;
-    background: transparent;
-}
-
-.progress-bar {
-    background-color: #023047ff;
-    transition: width 0.3s ease;
-}
-
-
-.profile-image {
-    position: relative;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    z-index: 2;
-}
-
-
-.video-container {
-    position: relative;
-    aspect-ratio: 16/9;
+#imageCarousel .carousel-inner {
+    border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.video-container video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+#imageCarousel .carousel-item {
+    height: 750px;
+    transition: transform 0.5s ease-in-out;
 }
 
-.play-button {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+#imageCarousel .card-img-top {
+    height: 500px;
 }
 
-/* Mobile-specific styles */
+#imageCarousel video {
+    height: 500px;
+}
+
+#imageCarousel .carousel-control-prev,
+#imageCarousel .carousel-control-next {
+    width: 4rem;
+    height: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.3);
+    border-radius: 50%;
+}
+
+
+/* ===== Mobile Styles ===== */
 @media (max-width: 768px) {
-    /* Navbar adjustments */
-    .navbar-brand img {
-        width: 50px;
-        height: 50px;
-    }
+    #imageCarousel .carousel-item { height: 500px; }
+    #imageCarousel .card-img-top,
+    #imageCarousel video { height: 300px; }
 
+    .navbar-brand img { width: 50px; height: 50px; }
     .navbar-collapse {
         background-color: rgba(0, 0, 0, 0.8);
         position: absolute;
@@ -76,58 +80,49 @@ body {
         width: 100%;
         z-index: 1000;
     }
-
+    
     .navbar-nav {
         flex-direction: column;
         align-items: center;
         padding: 1rem 0;
     }
-
-    .nav-item {
-        margin: 0.5rem 0;
-    }
-
-    /* Hero section adjustments */
-    .hero-section {
-        padding-top: 80px !important;
-    }
-
-    .magic-pattern-container {
-        width: 300px !important; /* Mobile size */
-        height: 300px !important;
-    }
-
-    .profile-image {
-        width: 90% !important;
-    }
-
+    
+    .hero-section { padding-top: 80px; }
     .hero-section .display-6,
     .hero-section .display-10,
-    .hero-section .lead {
-        text-align: center !important;
-    }
-
-    /* Video section adjustments */
-    .video-container {
-        height: 300px !important;
-    }
-
+    .hero-section .lead { text-align: center; }
+    
+    .video-container { height: 300px; }
     .play-button {
         width: 50px;
         height: 50px;
         bottom: 10px;
         right: 10px;
     }
+}
 
-    /* Carousel adjustments */
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 5% !important;
-    }
+/* ===== Button Styles ===== */
+.btn-outline-custom {
+    color: var(--fonts);
+    border: 2px solid var(--button-bg);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        width: 30px;
-        height: 30px;
-    }
+.btn-outline-custom:hover {
+    color: #d3d3d3;
+    background-color: var(--button-bg);
+    border-color: var(--button-bg);
+}
+
+.btn-custom {
+    color: #d3d3d3;
+    background-color: var(--button-bg);
+    border: 2px solid var(--button-bg);
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: var(--button-hover);
+    border-color: var(--button-hover);
 }

@@ -29,20 +29,6 @@ video.addEventListener('ended', () => {
     playPauseIcon.classList.replace('bx-pause', 'bx-play');
 });
 
-// Video scaling on scroll
-window.addEventListener('scroll', () => {
-    const videoContainer = document.querySelector('.video-container');
-    const mobileBreakpoint = 768;
-    
-    if (window.innerWidth <= mobileBreakpoint) return;
-
-    const scrollY = window.scrollY;
-    const maxScroll = 600;
-    const scaleFactor = Math.max(0, Math.min(1, scrollY / maxScroll));
-    
-    videoContainer.style.transform = `scale(${1 + scaleFactor * 0.5})`;
-});
-
 // Carousel population
 document.addEventListener("DOMContentLoaded", () => {
     fetch('/static/cardwheel.json')
