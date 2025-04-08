@@ -25,6 +25,11 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
     backdrop-filter: blur(10px);
     background-color: #f1e9d2;
 }
+.profile-image {
+    width: auto;
+    height: 500px;
+}
+
 
 /* ===== Carousel Styles ===== */
 #imageCarousel {
@@ -63,7 +68,18 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
     background: rgba(0,0,0,0.3);
     border-radius: 50%;
 }
-
+#play-pause-btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
 
 /* ===== Mobile Styles ===== */
 @media (max-width: 768px) {

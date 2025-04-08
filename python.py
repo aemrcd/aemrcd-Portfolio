@@ -4,7 +4,7 @@ import os
 import re
 import requests
 from dotenv import load_dotenv
-from SMTP import send_email  # Assuming you have this module
+from SMTP import send_email 
 
 app = Flask(__name__)
 load_dotenv()
@@ -102,7 +102,7 @@ def submit_form():
     """
 
     try:
-        send_email(subject=f"Contact Form: {subject}", body=email_body)
+        send_email(to_email=email, subject=f"Contact Form: {subject}", body=email_body)
         return render_template("Contact.html", success="Thank you! Message sent.",
             sitekey=os.getenv("hcaptcha-sitekey"),
             errors={}, form_data={'name': '', 'email': '', 'subject': '', 'message': '', 'privacyCheck': False})
