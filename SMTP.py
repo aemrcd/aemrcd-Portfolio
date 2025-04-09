@@ -10,13 +10,13 @@ def send_email(to_email, subject, body):
     # Get credentials from env
     smtp_server = os.getenv("SMTP_SERVER")
     smtp_port = int(os.getenv("SMTP_PORT"))
-    smtp_email = os.getenv("SMTP_EMAIL")
+    smtp_email = os.getenv("SMTP_USERNAME")
     smtp_password = os.getenv("SMTP_PASSWORD")
 
     # Create message
     msg = MIMEMultipart()
-    msg['From'] = smtp_email
-    msg['To'] = to_email
+    msg['From'] = to_email
+    msg['To'] = smtp_email
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
 

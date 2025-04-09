@@ -45,37 +45,43 @@
                 {% endif %}
 
                 <form id="contactForm" method="POST" action="/submit">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="name" maxlength="50" required 
-                            placeholder="Name" value="{{ form_data.get('name', '') }}">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="name" class="form-control" id="name" maxlength="15" placeholder="Name" required 
+                            value="{{ form_data.get('name', '') }}">
+                        <label for="name">Name</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                
+                    <div class="form-floating mb-3">
                         <input type="email" name="email" class="form-control {% if errors['email'] %}is-invalid{% endif %}" 
-                            id="email" required placeholder="Email" value="{{ form_data.get('email', '') }}">
+                            id="email" placeholder="Email" required value="{{ form_data.get('email', '') }}">
+                        <label for="email">Email</label>
                         {% if errors['email'] %}
                             <div class="error-popup">{{ errors['email'] }}</div>
                         {% endif %}
                     </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject (max 100 chars)</label>
+                
+                    <div class="form-floating mb-3">
                         <input type="text" name="subject" class="form-control" id="subject" maxlength="100" 
                             placeholder="Subject (max 100 chars)" value="{{ form_data.get('subject', '') }}">
+                        <label for="subject">Subject (max 100 words)</label>
                     </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea name="message" class="form-control" id="message" rows="5" maxlength="500" 
+                
+                    <div class="form-floating mb-3">
+                        <textarea name="message" class="form-control" id="message" style="height: 150px" rows="5" maxlength="500"
                             placeholder="Message (max 500 words)">{{ form_data.get('message', '') }}</textarea>
+                        <label for="message">Message (max 500 words)</label>
                     </div>
+                
                     <div class="captcha-container">
                         <div class="h-captcha" data-sitekey="{{ sitekey }}"></div>
                     </div>
+                
                     <div class="mb-3 form-check">
                         <input type="checkbox" name="privacyCheck" class="form-check-input" id="privacyCheck" 
                             required {% if form_data.get('privacyCheck') %}checked{% endif %}>
                         <label class="form-check-label" for="privacyCheck">I agree to the privacy policy</label>
                     </div>
+                
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
 

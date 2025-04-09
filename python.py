@@ -18,32 +18,56 @@ def verify_captcha(token):
     data = {'secret': HCAPTCHA_SECRET_KEY, 'response': token}
     return requests.post(url, data=data).json()
 
+
 def verify_email_address(email):
     api_key = os.getenv("ABSTRACT_API_KEY")
     url = f"https://emailvalidation.abstractapi.com/v1/?api_key={api_key}&email={email}"
     
+    allowed_free_domains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"]
+
     try:
         response = requests.get(url)
         data = response.json()
-        
-        # Debugging: Print the full response from AbstractAPI
+
+        # Debugging: Print the full API response
         print(f"AbstractAPI response for {email}: {data}")
-        
-        # Check if the email is deliverable and not disposable
-        deliverability = data.get("deliverability")
-        is_disposable = data.get("is_disposable_email", {}).get("value", False)  # Fix this line
 
-        print(f"Deliverability: {deliverability}, Is disposable: {is_disposable}")
+        # Get key validation metrics
+        quality_score = float(data.get("quality_score", 0))
+        is_valid_format = data.get("is_valid_format", {}).get("value", False)
+        deliverability = data.get("deliverability", "UNDELIVERABLE")
+        domain = email.split('@')[-1] if '@' in email else None
 
-        # Check for deliverability and that it's not a disposable email
-        if deliverability == "DELIVERABLE" and not is_disposable:
-            return True
-        else:
+        # Log validation details
+        print(f"Quality Score: {quality_score}, Valid Format: {is_valid_format}, "
+              f"Deliverability: {deliverability}, Domain: {domain}")
+
+        # Primary validation checks
+        if not is_valid_format:
+            print("Failed: Invalid email format")
             return False
+
+        if quality_score < 0.90:  # Threshold for acceptable quality score
+            print("Failed: Low quality score")
+            return False
+
+        if deliverability != "DELIVERABLE":
+            print("Failed: Not deliverable")
+            return False
+
+        # Check for allowed free domains
+        if domain in allowed_free_domains:
+            print("Passed: Allowed free domain")
+            return True
+
+        # Accept any email that passed the above validations
+        print("Passed: Valid email")
+        return True
 
     except Exception as e:
         print(f"Email validation error: {str(e)}")
         return False
+    
 
 @app.route('/')
 @app.route('/Home')
@@ -142,4 +166,4 @@ def submit_form():
             form_data=request.form)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0",debug=True)
