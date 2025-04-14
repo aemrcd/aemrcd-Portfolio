@@ -45,7 +45,7 @@
     {
         "id": 8,
         "image": "/static/PICTURE/PORTFOLIO.png",
-        "info": "A personal portfolio website designed by me using HTML, CSS, and JavaScript, showcasing my skills and projects.",
+        "info": "Testing a new Ghibli style promt using ChatGPT",
         "showInfo": true
     }
 ]

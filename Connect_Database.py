@@ -9,10 +9,10 @@ def connect_to_database():
             # password="",
             # port=3306,
 
-            host="10.2.3.127",
-            user="AEROL",
-            database="myContact",
-            password="1234"
+            # host="10.2.3.127",
+            # user="AEROL",
+            # database="myContact",
+            # password="1234"
 
         )
         if connection.is_connected():

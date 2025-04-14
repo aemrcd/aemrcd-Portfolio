@@ -56,9 +56,9 @@ def verify_email_address(email):
             return False
 
         # Check for allowed free domains
-        if domain in allowed_free_domains:
+        if domain not in allowed_free_domains:
             print("Passed: Allowed free domain")
-            return True
+            return False
 
         # Accept any email that passed the above validations
         print("Passed: Valid email")
