@@ -10,7 +10,7 @@ def send_email(to_email, subject, body):
     # Get credentials from env
     smtp_server = os.getenv("SMTP_SERVER")
     smtp_port = int(os.getenv("SMTP_PORT"))
-    smtp_email = os.getenv("SMTP_USERNAME")
+    smtp_email = os.getenv("SMTP_EMAIL")
     smtp_password = os.getenv("SMTP_PASSWORD")
 
     # Create message
