@@ -53,13 +53,13 @@
                     <div class="form-floating mb-3">
                         <input type="text" name="subject" class="form-control" id="subject" maxlength="100" 
                             placeholder="Subject (max 100 chars)" value="{{ form_data.get('subject', '') }}">
-                        <label for="subject">Subject (max 100 words)</label>
+                        <label for="subject">Subject</label>
                     </div>
                 
                     <div class="form-floating mb-3">
                         <textarea name="message" class="form-control" id="message" style="height: 150px" rows="5" maxlength="500"
                             placeholder="Message (max 500 words)">{{ form_data.get('message', '') }}</textarea>
-                        <label for="message">Message (max 500 words)</label>
+                        <label for="message">Message </label>
                     </div>
                 
                     <div class="captcha-container">
