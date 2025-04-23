@@ -11,7 +11,7 @@
 
 ## <h3 style="letter-spacing:2px">  📦 Clone and Setup Project </h3> 
 
-To use the contact form functionality, you’ll need to set up the API keys in your `.env` file.
+To use the contact form functionality, you’ll need to set up Virtual Environment and the API keys in your `.env` file.
 
 ### Steps:
 1. Clone the Respository
@@ -19,8 +19,28 @@ To use the contact form functionality, you’ll need to set up the API keys in y
    git clone https://github.com/aemrcd/aemrcd.github.io
 ```
 
+2. Setup Venv & Activate
+- Create a Virtual Environment
+```bash
+   python -m venv venv
+```
+- Activate in CMD / Powershell
+- #### Powershell
+```Powershell
+    Venv/Scripts/activate.ps1 
+```
+- #### CMD
+```bash
+    Venv/Scripts/activate.bat 
+```
+3.Install Requirements
+```bash
+    pip install -r requirements.txt
+```
+
+### Creating ".env"  getting the api keys:
+1. Create a `.env` file in the root of the project.
 2. Add the following environment variables:
    ```plaintext
    HCAPTCHA_SECRET_KEY=your_hcaptcha_secret_key
    ABSTRACT_API_KEY=your_abstract_api_key
-
