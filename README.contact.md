@@ -5,7 +5,8 @@
 
 ## **hCaptcha Endpoint**: This project uses the hCaptcha service to prevent bots. You can find more about it here: [https://www.hcaptcha.com](https://www.hcaptcha.com).
 
-### 🔐 How to Get Your hCaptcha Site Key & Secret Key
+### <img src="https://wpforms.com/wp-content/uploads/2024/09/hcaptcha-logo.png" width="40" height="40"> How to Get Your hCaptcha Site Key & Secret Key
+
 
 Follow these steps to set up hCaptcha and integrate it into your project:
 
@@ -24,10 +25,11 @@ Follow these steps to set up hCaptcha and integrate it into your project:
    - (Optional) Set your **difficulty level** for the CAPTCHA challenge.
 
 7. After saving your site, hCaptcha will provide you with:
-   - ✅ **Site Key** – used in your frontend (e.g., `Contact.html`)
-   - 🔒 **Secret Key** – used in your backend (Flask)
+   - ✅ **Site Key** – used in your frontend (e.g., `Contact.html`) this is in Dashboard 
+   - 🔒 **Secret Key** – used in your backend (Flask) this is normally on the settings
 
 8. Add these keys to your `.env` file:
+   - ***⚠️ MAKE SURE TO PLACE ALL KEYS IN `.env`⚠️***
    ```ini
    hcaptcha-sitekey=your_site_key_here
    SECRET_KEY=your_secret_key_here
