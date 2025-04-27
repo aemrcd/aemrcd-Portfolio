@@ -1,2 +1,5 @@
 venv
 .env
+__pycache__/
+RENDER-IMG-DOCU
+mariadbmariadb-standard-developer_cheat-sheet_1113.pdf
