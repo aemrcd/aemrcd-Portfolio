@@ -1,9 +1,9 @@
 
-<h2 style="letter-spacing:5px; font-style:=bold;"> My Portfolio Website</h2>
+<h1 style="letter-spacing:5px; font-style:=bold;"> My Portfolio Website</h1>
 
-### This is my personal portfolio site with a contact form. The form includes spam protection via **hCaptcha** and email validation via **Abstract API**.
+#### This is my personal portfolio site with a contact form. The form includes spam protection via **hCaptcha** and email validation via **Abstract API**.
 
-## **Table of Contents**
+## **📚 Table of Contents**
 
 ### 1. [📦 Clone and Setup Project](README.md#---clone-and-setup-project-)
 ### 2. [🌐 API Locations](README.md#-api-locations)
@@ -13,21 +13,23 @@
 
 # <h2 style="letter-spacing:2px">  📦 Clone and Setup Project </h2> 
 
-To use the contact form functionality, you’ll need to set up Virtual Environment and the API keys in your `.env` file.
+#### To use the contact form functionality, you’ll need to set up Virtual Environment and the API keys in your `.env` file.
 
-### 1. Cloning the Repository
-
-Follow these simple steps to clone the repository to your local machine:
+#### Follow these simple steps to clone the repository to your local machine:
 
 1. **Create a folder** where you want to store the cloned files:
+
    - You can create a folder anywhere on your computer (example, in your "Documents" or on your desktop).
 
 2. **Open the Command Prompt**:
+   
    - Press `Windows Key + R` to open the "Run" menu.
    - Type `cmd` and press **Enter**. This will open the Command Prompt.
 
-3. **Clone the Repository**:
+3. **Clone the Repository**
+   
    - In the Command Prompt, use the `git clone` command to clone the repository into the folder you created:
+
    ```bash
     git clone https://github.com/aemrcd/aemrcd.github.io
    ```
@@ -37,11 +39,14 @@ Follow these simple steps to clone the repository to your local machine:
     ```bash 
     pip install -r requirements.txt
     ```
+    
 4. **Setup Venv & Activate**:
    - Create a Virtual Environment
+     
    ```bash
       python -m venv venv
    ```
+   
    - Powershell Activate in Powershell
    ```Powershell
       .\venv\Scripts\activate     
