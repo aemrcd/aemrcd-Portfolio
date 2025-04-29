@@ -18,7 +18,9 @@ HCAPTCHA_SECRET_KEY = os.getenv("SECRET_KEY")
 def verify_captcha(token):
     url = 'https://hcaptcha.com/siteverify'
     data = {'secret': HCAPTCHA_SECRET_KEY, 'response': token}
-    return requests.post(url, data=data).json()
+    response = requests.post(url, data=data).json()
+    # print(f"CAPTCHA verification response: {response}")  # Debugging: Print the CAPTCHA response
+    return response
 
 
 def verify_email_address(email):
@@ -104,21 +106,31 @@ def submit_form():
         errors["captcha"] = "CAPTCHA verification failed."
 
     # Validate Name
-    if not name: 
+    if not name:
         errors["name"] = "Name is required."
 
     # Validate Email
-    if not email: 
+    email_is_valid = verify_email_address(email)
+    if not email:
         errors["email"] = "Email is required."
-    elif not verify_email_address(email):
+    elif not email_is_valid:
         errors["email"] = "Invalid or disposable email address."
 
     # Validate Privacy Check
-    if not privacy_check: 
+    if not privacy_check:
         errors["privacyCheck"] = "Please accept the privacy policy."
 
+    # Stop early if there are errors
     if errors:
-        return render_template("Contact.html", 
+        return render_template("Contact.html",
+            sitekey=os.getenv("hcaptcha-sitekey"),
+            errors=errors,
+            form_data=request.form)
+
+    # Safety net: Recheck email validity before DB insert
+    if not email_is_valid:
+        errors["email"] = "Invalid email address (internal check)."
+        return render_template("Contact.html",
             sitekey=os.getenv("hcaptcha-sitekey"),
             errors=errors,
             form_data=request.form)
@@ -139,7 +151,7 @@ def submit_form():
         conn = connect_to_database()
         cursor = conn.cursor()
         email_token, domain = tokenize_email(email)
-        TB_NAME = "contact_submissions" #OS.getenv("TB_NAME")
+        TB_NAME = "contact_submissions"  # or use os.getenv("TB_NAME")
         cursor.execute(
             f"""INSERT INTO {TB_NAME} (name, email_token, email_domain, created_on)
             VALUES (%s, %s, %s, CURRENT_DATE)""",
@@ -162,19 +174,19 @@ def submit_form():
     # Send email with error handling
     try:
         send_email(to_email=email, subject=f"Contact Form: {subject}", body=email_body)
-        return render_template("Contact.html", 
+        return render_template("Contact.html",
             success="Thank you! Your message has been sent.",
             sitekey=os.getenv("hcaptcha-sitekey"),
-            errors={}, 
+            errors={},
             form_data={'name': '', 'email': '', 'subject': '', 'message': '', 'privacyCheck': False})
-    
+
     except SMTPRecipientsRefused:
         errors["email"] = "The email address does not exist. Please check and try again."
         return render_template("Contact.html",
             sitekey=os.getenv("hcaptcha-sitekey"),
             errors=errors,
             form_data=request.form)
-    
+
     except smtplib.SMTPException as e:
         error_msg = str(e)
         if any(code in error_msg for code in ['550', '551', '554']):
@@ -185,7 +197,7 @@ def submit_form():
             sitekey=os.getenv("hcaptcha-sitekey"),
             errors=errors,
             form_data=request.form)
-    
+
     except Exception as e:
         print(f"Unexpected error: {str(e)}")
         errors["general"] = "An unexpected error occurred. Please try again."
@@ -193,6 +205,7 @@ def submit_form():
             sitekey=os.getenv("hcaptcha-sitekey"),
             errors=errors,
             form_data=request.form)
+
 
 def tokenize_email(email):
     # Generate a random user ID
