@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import os
 import requests
 import json
-import secrets  # For generating random numbers
+import secrets  
 from dotenv import load_dotenv
 from SMTP import send_email
 from smtplib import SMTPRecipientsRefused
