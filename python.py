@@ -41,7 +41,7 @@ def verify_email_address(email):
         is_valid_format = data.get("is_valid_format", {}).get("value", False)
         deliverability = data.get("deliverability", "UNDELIVERABLE")
         domain = email.split('@')[-1] if '@' in email else None
-
+ 
         # Log validation details
         print(f"Quality Score: {quality_score}, Valid Format: {is_valid_format}, "
               f"Deliverability: {deliverability}, Domain: {domain}")
@@ -120,20 +120,8 @@ def submit_form():
     if not privacy_check:
         errors["privacyCheck"] = "Please accept the privacy policy."
 
-    # Stop early if there are errors
     if errors:
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
-
-    # Safety net: Recheck email validity before DB insert
-    if not email_is_valid:
-        errors["email"] = "Invalid email address (internal check)."
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
+        return render_template("Contact.html", sitekey=os.getenv("hcaptcha-sitekey"), errors=errors, form_data=request.form)
 
     email_body = f"""
     You received a new message from your contact form:
@@ -146,65 +134,88 @@ def submit_form():
     {message}
     """
 
-    # Database operations with error handling
+    email_token, domain = tokenize_email(email)
+    conn = None
+    cursor = None
+    
     try:
+        # Initialize database connection
         conn = connect_to_database()
         cursor = conn.cursor()
-        email_token, domain = tokenize_email(email)
-        TB_NAME = "contact_submissions"  # or use os.getenv("TB_NAME")
+
+        # Insert submission
         cursor.execute(
-            f"""INSERT INTO {TB_NAME} (name, email_token, email_domain, created_on)
+            """INSERT INTO Submissions (name, email_token, email_domain, created_on)
             VALUES (%s, %s, %s, CURRENT_DATE)""",
             (name, email_token, domain)
         )
         conn.commit()
+
+        # Send admin email and log it
+        try:
+            send_email(email, f"Contact Form: {subject}", email_body)
+            cursor.execute(
+                """INSERT INTO EmailLogs (email_token, sent_on, status, error_message)
+                VALUES (%s, NOW(), %s, %s)""",
+                (email_token, 'SUCCESS', '')
+            )
+            conn.commit()
+
+            # Send confirmation email to user
+            user_subject = "Thank you for contacting me!"
+            user_body = f"""
+            Dear {name},
+
+            Thank you for reaching out to Me. I have received your message and will get back to you within 2-3 business days.
+
+            Here's a summary of your submission:
+            - Subject: {subject}
+            - Message: {message}
+
+            If you have any further questions, feel free to reply to this email.
+
+            Best regards,
+            Aerol Jr
+            """
+            send_email(email, user_subject, user_body)
+
+        except SMTPRecipientsRefused:
+            errors["email"] = "The email address does not exist."
+            log_error = 'Recipient refused'
+        except Exception as e:
+            errors["email"] = "Failed to send email. Please try again later."
+            log_error = str(e)
+
+        if errors:
+            cursor.execute(
+                """INSERT INTO EmailLogs (email_token, sent_on, status, error_message)
+                VALUES (%s, NOW(), %s, %s)""",
+                (email_token, 'FAILED', log_error)
+            )
+            conn.commit()
+
     except Exception as e:
-        errors["database"] = "Failed to save your submission. Please try again."
+        errors["database"] = "Failed to save your submission."
         print(f"Database error: {str(e)}")
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
+
     finally:
-        if 'cursor' in locals() and cursor:
+        if cursor:
             cursor.close()
-        if 'conn' in locals() and conn:
+        if conn:
             conn.close()
 
-    # Send email with error handling
-    try:
-        send_email(to_email=email, subject=f"Contact Form: {subject}", body=email_body)
-        return render_template("Contact.html",
-            success="Thank you! Your message has been sent.",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors={},
-            form_data={'name': '', 'email': '', 'subject': '', 'message': '', 'privacyCheck': False})
+    if errors:
+        return render_template("Contact.html", 
+                             sitekey=os.getenv("hcaptcha-sitekey"), 
+                             errors=errors, 
+                             form_data=request.form)
 
-    except SMTPRecipientsRefused:
-        errors["email"] = "The email address does not exist. Please check and try again."
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
-
-    except smtplib.SMTPException as e:
-        error_msg = str(e)
-        if any(code in error_msg for code in ['550', '551', '554']):
-            errors["email"] = "The email address was rejected by the server."
-        else:
-            errors["general"] = "Failed to send email. Please try again later."
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
-
-    except Exception as e:
-        print(f"Unexpected error: {str(e)}")
-        errors["general"] = "An unexpected error occurred. Please try again."
-        return render_template("Contact.html",
-            sitekey=os.getenv("hcaptcha-sitekey"),
-            errors=errors,
-            form_data=request.form)
+    return render_template("Contact.html", 
+                         success="Thank you! Your message has been sent.", 
+                         sitekey=os.getenv("hcaptcha-sitekey"), 
+                         errors={}, 
+                         form_data={'name': '', 'email': '', 'subject': '', 
+                                  'message': '', 'privacyCheck': False})
 
 
 def tokenize_email(email):
