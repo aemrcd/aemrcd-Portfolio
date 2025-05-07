@@ -6,17 +6,17 @@ load_dotenv()
 def connect_to_database():
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            port=3306,
-            database="mycontactdb"
+            # host="localhost",
+            # user="root",
+            # password="",
+            # port=3306,
+            # database="mycontactdb"
 
-            # host=os.getenv("DB_HOST"),
-            # user=os.getenv("DB_USER"),
-            # password=os.getenv("DB_PASSWORD"),
-            # database=os.getenv("DB_NAME"),
-            # port=int(os.getenv("DB_PORT", 3306)) 
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            database=os.getenv("DB_NAME"),
+            port=3306
         )
         if connection.is_connected():
             print("✅ Connection successful!")
@@ -24,6 +24,10 @@ def connect_to_database():
     except Error as e:
         print(f"❌ Error: {e}")
         return None
+    
+
+# connect_to_database()
+
 
 
 
