@@ -31,7 +31,7 @@ jobs:
           app-name: ${{ secrets.AZURE_API_APP_NAME }}  # Set this in your GitHub secrets
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}  # Set this in your GitHub secrets
-          package: ./api  # Path to the Flask app (adjust if needed)
+          package: .
         
   configure-env:
     runs-on: ubuntu-latest
