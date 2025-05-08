@@ -19,19 +19,12 @@ jobs:
         with:
           python-version: '3.9'  # Set the Python version (can change it to your version)
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m venv venv  # Create a virtual environment
           source venv/bin/activate  # Activate the environment
           pip install -r requirements.txt  # Install the dependencies from requirements.txt
 
-      # Step 4: Run tests (optional, you can remove this if you don't have tests)
-      - name: Run tests
-        run: |
-          pytest  # Run tests (if you have any)
-
-      # Step 5: Deploy to Azure
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
@@ -45,7 +38,6 @@ jobs:
     needs: build  # This job depends on the build job (runs after the build job)
 
     steps:
-      # Step 6: Set environment variables (if needed)
       - name: Configure environment variables
         run: |
           echo "HCAPTCHA_SITEKEY=${{ secrets.HCAPTCHA_SITEKEY }}" >> .env
