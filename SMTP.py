@@ -10,11 +10,11 @@ def send_email(from_email, subject, body):
     if not all([from_email, subject, body]):  # Check if any parameter is None or empty
         raise ValueError("Email parameters cannot be None or empty")
         
-    smtp_server = os.getenv('SMTP_SERVER')
-    smtp_port = int(os.getenv('SMTP_PORT'))
-    smtp_username = os.getenv('SMTP_USERNAME')
-    smtp_password = os.getenv('SMTP_PASSWORD')
-    smtp_email = os.getenv('SMTP_EMAIL')  # This is the email account used to send
+    smtp_server = os.getenv('SMTPSERVER')
+    smtp_port = int(os.getenv('SMTPPORT'))
+    smtp_username = os.getenv('SMTPUSERNAME')
+    smtp_password = os.getenv('SMTPPASSWORD')
+    smtp_email = os.getenv('SMTPEMAIL')  # This is the email account used to send
 
     # Create message
     message = MIMEMultipart()

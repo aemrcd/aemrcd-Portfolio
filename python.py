@@ -12,7 +12,7 @@ from Connect_Database import connect_to_database
 app = Flask(__name__)
 load_dotenv()
 
-HCAPTCHA_SECRET_KEY = os.getenv("SECRET_KEY")
+HCAPTCHA_SECRET_KEY = os.getenv("SECRETKEY")
 
 # Verify CAPTCHA response
 def verify_captcha(token):
@@ -24,7 +24,7 @@ def verify_captcha(token):
 
 
 def verify_email_address(email):
-    api_key = os.getenv("ABSTRACT_API_KEY")
+    api_key = os.getenv("ABSTRACTAPIKEY")
     url = f"https://emailvalidation.abstractapi.com/v1/?api_key={api_key}&email={email}"
     
     allowed_free_domains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"]
@@ -87,7 +87,7 @@ def Home():
 @app.route('/Contact')
 def Contact():
     return render_template("Contact.html", 
-        sitekey=os.getenv("hcaptcha-sitekey"),
+        sitekey=os.getenv("hcaptchasitekey"),
         errors={}, 
         form_data={'name': '', 'email': '', 'subject': '', 'message': '', 'privacyCheck': False})
 @app.route('/submit', methods=['POST'])
@@ -121,7 +121,7 @@ def submit_form():
         errors["privacyCheck"] = "Please accept the privacy policy."
 
     if errors:
-        return render_template("Contact.html", sitekey=os.getenv("hcaptcha-sitekey"), errors=errors, form_data=request.form)
+        return render_template("Contact.html", sitekey=os.getenv("hcaptchasitekey"), errors=errors, form_data=request.form)
 
     email_body = f"""
     You received a new message from your contact form:
@@ -206,13 +206,13 @@ def submit_form():
 
     if errors:
         return render_template("Contact.html", 
-                             sitekey=os.getenv("hcaptcha-sitekey"), 
+                             sitekey=os.getenv("hcaptchasitekey"), 
                              errors=errors, 
                              form_data=request.form)
 
     return render_template("Contact.html", 
                          success="Thank you! Your message has been sent.", 
-                         sitekey=os.getenv("hcaptcha-sitekey"), 
+                         sitekey=os.getenv("hcaptchasitekey"), 
                          errors={}, 
                          form_data={'name': '', 'email': '', 'subject': '', 
                                   'message': '', 'privacyCheck': False})
