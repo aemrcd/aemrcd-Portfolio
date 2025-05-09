@@ -82,7 +82,7 @@ def Home():
     except Exception as e:
         print(f"Error loading carousel data: {e}")
         carousel_items = []
-    return render_template("Index.html", carousel_items=carousel_items)
+    return render_template("index.html", carousel_items=carousel_items)
 
 @app.route('/Contact')
 def Contact():
