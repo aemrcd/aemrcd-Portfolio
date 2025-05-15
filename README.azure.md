@@ -1,4 +1,4 @@
-# 🚀 Deploying Your Flask App to Azure with GitHub Actions - A Student-Friendly Guide
+# 🚀 Deploying Your Flask App to Azure with the use of  GitHub Actions & Powershell CLI
 
 
 ### These steps guide you through deploying your Flask web app to Azure using the Azure Web App service.
