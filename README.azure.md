@@ -12,7 +12,6 @@
 
 ---
 
-## 🌟 Let's Get Started!
 
 ### 1. Create a Resource Group
 
