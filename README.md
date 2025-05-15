@@ -3,15 +3,16 @@
 
 #### This is my personal portfolio site with a contact form. The form includes spam protection via **hCaptcha** and email validation via **Abstract API**.
 
-## **📚 Table of Contents**
+# **📚 Table of Contents**
 
-### 1. [📦 Clone and Setup Project](README.md#---clone-and-setup-project-)
-### 2. [🌐 API Locations](README.md#-api-locations)
+### 1. [Clone and Setup Project](README.md#-clone-and-setup-project-)
+### 2. [Database Setup](README.md#%EF%B8%8F-database-setup)
+### 3. [API Locations](README.md#-api-locations)
    - [hCaptcha Setup](README.md#hcaptcha-endpoint-this-project-uses-the-hcaptcha-service-to-prevent-bots-you-can-find-more-about-it-here-httpswwwhcaptchacom)
    - [Abstract API Setup](README.md#abstract-api-for-email-validation-the-project-uses-the-abstract-api-you-can-sign-up-for-an-api-key-here-httpswwwabstractapicomemail-validation)
-### 3. [🖥️  Website Features](README.md#%EF%B8%8F-website-features)
+### 4. [Website Features](README.md#%EF%B8%8F-website-features)
 
-# <h2 style="letter-spacing:2px">  📦 Clone and Setup Project </h2> 
+#  📦 Clone and Setup Project </h2> 
 
 #### To use the contact form functionality, you’ll need to set up Virtual Environment and the API keys in your `.env` file.
 
@@ -51,6 +52,68 @@
    ```Powershell
       .\venv\Scripts\activate     
    ```
+
+# 🗃️ Database Setup 
+
+## 1. Installing MariaDB to PI/Virtual Machine
+### Make sure you install Ubuntu on your `PI` & `Virtual Machine`
+
+- Press `Windows Key` to open the "Search" menu.
+   - Type `Terminal` and press **Enter**. This will open the Terminal Prompt.
+   - install MariaDB by typing: 
+```bash 
+    sudo apt install mariadb-server
+```
+```bash
+    sudo mariadb_secure_installation
+```
+## 2. Creating and Managing Databases
+ 1. Log in to MariaDB as root:
+
+```bash
+    sudo mysql -u root -p
+```
+ 2. Create a new database:
+```bash
+    CREATE DATABASE my_database;
+```
+ 3. Create a new user and grant privileges:
+```bash
+    CREATE USER 'my_user'@'localhost' IDENTIFIED BY 'password';
+    GRANT ALL PRIVILEGES ON my_database.* TO 'my_user'@'localhost';
+    FLUSH PRIVILEGES;
+```
+ 4. Exit MariaDB:
+```bash
+    EXIT;
+```
+## 3. Managing Tables in MariaDB:
+
+1. Showing The Database:
+- This statement works to show all of your database.
+```bash
+   SHOW DATABASES;
+```
+2. SELECTING The Database:
+- This statement works if you have multiple database.
+```bash
+   USE "yourdatabase";
+```
+3. Viewing tables in your database
+- To see the data inside a table, use the `SELECT` query. Replace `"yourtable"` with the name of the your table  to view.
+
+```bash
+   SELECT * FROM "yourdatabase";
+```
+4. Deleting a Row from a Table
+
+- If you want to delete a specific row in a table, use the   `DELETE` statement with a `WHERE` and  Replace `"yourtable"` with the your table name and `"PLACE_YOUR_ID"` with the ID or condition to delete a spesific row.
+
+```bash
+    SELECT * FROM  "yourdatabase" WHERE Id IN = "PLACE_YOUR_ID";
+```
+
+
 
 #  🌐 API LOCATIONS 
 
