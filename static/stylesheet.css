@@ -151,13 +151,18 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
     #imageCarousel video { height: 300px; }
 
     .navbar-brand img { width: 50px; height: 50px; }
+    
+    /* Updated navbar styles */
     .navbar-collapse {
-        background-color: rgba(0, 0, 0, 0.8);
-        position: absolute;
-        top: 100%;
+        background-color: var(--hero-bg);
+        position: fixed;
+        top: 60px; 
         left: 0;
         width: 100%;
         z-index: 1000;
+        padding: 1rem;
+        border-radius: 8%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
     .navbar-nav {
@@ -165,7 +170,14 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
         align-items: center;
         padding: 1rem 0;
     }
+
+    .nav-item {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
     
+    /* Keep existing mobile styles */
     .hero-section { padding-top: 80px; }
     .hero-section .display-6,
     .hero-section .display-10,
@@ -178,6 +190,7 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
         bottom: 10px;
         right: 10px;
     }
+   
 }
 
 /* ===== Button Styles ===== */
@@ -206,16 +219,36 @@ body { font-family: 'Mochiy Pop One', sans-serif; }
     border-color: var(--button-hover);
 }
 
-@media (max-width: 1200px) { /* Adjust the breakpoint as needed */
+@media (max-width: 1200px) { 
     .captcha-container .h-captcha {
         width: 250px;
         height: auto;
     }
 }
 
-@media (max-width: 992px) { /* Tablet sizes */
-    .captcha-container .h-captcha {
+
+@media (max-width: 991px) {
+  .navbar {
+    background-color: var(--hero-bg);
+    position: relative;
+    z-index: 1030;
+  }
+  
+
+  .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: inherit;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .captcha-container .h-captcha {
         width: 200px;
         height: auto;
     }
+
 }
