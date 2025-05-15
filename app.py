@@ -19,7 +19,7 @@ def verify_captcha(token):
     url = 'https://hcaptcha.com/siteverify'
     data = {'secret': HCAPTCHA_SECRET_KEY, 'response': token}
     response = requests.post(url, data=data).json()
-    # print(f"CAPTCHA verification response: {response}")  # Debugging: Print the CAPTCHA response
+    # print(f"CAPTCHA verification response: {response}")  
     return response
 
 
@@ -33,16 +33,16 @@ def verify_email_address(email):
         response = requests.get(url)
         data = response.json()
 
-        # Debugging: Print the full API response
+        
         print(f"AbstractAPI response for {email}: {data}")
 
-        # Get key validation metrics
+        
         quality_score = float(data.get("quality_score", 0))
         is_valid_format = data.get("is_valid_format", {}).get("value", False)
         deliverability = data.get("deliverability", "UNDELIVERABLE")
         domain = email.split('@')[-1] if '@' in email else None
  
-        # Log validation details
+       
         print(f"Quality Score: {quality_score}, Valid Format: {is_valid_format}, "
               f"Deliverability: {deliverability}, Domain: {domain}")
 
@@ -90,6 +90,7 @@ def Contact():
         sitekey=os.getenv("hcaptchasitekey"),
         errors={}, 
         form_data={'name': '', 'email': '', 'subject': '', 'message': '', 'privacyCheck': False})
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     name = request.form.get("name", "").strip()
@@ -139,11 +140,11 @@ def submit_form():
     cursor = None
     
     try:
-        # Initialize database connection
+       
         conn = connect_to_database()
         cursor = conn.cursor()
 
-        # Insert submission
+      
         cursor.execute(
             """INSERT INTO Submissions (name, email_token, email_domain, created_on)
             VALUES (%s, %s, %s, CURRENT_DATE)""",
@@ -219,13 +220,13 @@ def submit_form():
 
 
 def tokenize_email(email):
-    # Generate a random user ID
-    user_id = secrets.randbelow(1000000)  # Generate a random number between 0 and 999,999
+   
+    user_id = secrets.randbelow(1000000)  
     
-    # Extract domain from email
+   
     domain = email.split('@')[-1]
     
-    # Create the tokenized email in the format User_<random_number>@<domain>
+  
     email_token = f"User_{user_id}"
     
     return email_token, domain
