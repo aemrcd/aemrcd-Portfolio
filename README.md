@@ -10,7 +10,8 @@
 ### 3. [API Locations](README.md#-api-locations)
    - [hCaptcha Setup](README.md#hcaptcha-endpoint-this-project-uses-the-hcaptcha-service-to-prevent-bots-you-can-find-more-about-it-here-httpswwwhcaptchacom)
    - [Abstract API Setup](README.md#abstract-api-for-email-validation-the-project-uses-the-abstract-api-you-can-sign-up-for-an-api-key-here-httpswwwabstractapicomemail-validation)
-### 4. [Website Features](README.md#%EF%B8%8F-website-features)
+### 4. [Deploy via Azure](README.azure.md)
+### 5. [Website Features](README.md#%EF%B8%8F-website-features)
 
 #  📦 Clone and Setup Project </h2> 
 
