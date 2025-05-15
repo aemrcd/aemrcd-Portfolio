@@ -190,6 +190,15 @@ This Flask project uses the **Abstract API Email Validation** service to verify 
 #  🖥️ WEBSITE FEATURES 
 
 <details>
-<summary style="font-weight: bold; font-size: 15px;">🖥️ WEBSITE FEATURES</summary>
-</details>
+<summary>🖥️ WEBSITE FEATURES</summary>
+
+<div align="center" >
+
+### **Flowchart:**  
+<img src="static/PICTURE/Flowchart.gif" alt="Flowchart" width="400px" style="border-radius: 12px;">
+
+### **Modern Web Design Preview:**  
+<img src="static/PICTURE/Web-main.gif" alt="Web Design" width="400px" style="border-radius: 12px;">
+
+</div>
 
