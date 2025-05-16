@@ -3,17 +3,17 @@ name: Build and Deploy Flask App to Azure
 on:
   push:
     branches:
-      - main  # This triggers the workflow on every push to the main branch
+      - main 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code from repository
+
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python environment
+  
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -28,29 +28,10 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ secrets.AZURE_API_APP_NAME }}  # Set this in your GitHub secrets
+          app-name: ${{ secrets.AZURE_API_APP_NAME }}  
           slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}  # Set this in your GitHub secrets
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }} 
           package: .
         
-  configure-env:
-    runs-on: ubuntu-latest
-    needs: build  # This job depends on the build job (runs after the build job)
 
-    steps:
-      - name: Configure environment variables
-        run: |
-          echo "HCAPTCHA_SITEKEY=${{ secrets.HCAPTCHA_SITEKEY }}" >> .env
-          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-          echo "SMTP_SERVER=${{ secrets.SMTP_SERVER }}" >> .env
-          echo "SMTP_PORT=${{ secrets.SMTP_PORT }}" >> .env
-          echo "SMTP_USERNAME=${{ secrets.SMTP_USERNAME }}" >> .env
-          echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
-          echo "SMTP_EMAIL=${{ secrets.SMTP_EMAIL }}" >> .env
-          echo "ABSTRACT_API_KEY=${{ secrets.ABSTRACT_API_KEY }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
 
