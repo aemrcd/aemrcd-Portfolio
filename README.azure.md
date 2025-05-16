@@ -7,7 +7,6 @@
 ## What You'll Need:
 
 * An Azure account ([Sign up here](https://azure.microsoft.com/))
-* Azure CLI installed ([Download it here](https://docs.microsoft.com/cli/azure/install-azure-cli))
 * A Flask app pushed to GitHub
 
 ---
